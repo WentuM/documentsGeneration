@@ -1,0 +1,25 @@
+from django.http import HttpResponse
+from django.shortcuts import render
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.pagesizes import letter
+
+
+def genereaza_pdf(request):
+    if request.method == 'POST':
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="example.pdf"'
+        doc = SimpleDocTemplate("example.pdf", pagesize=letter, rightMargin=70, leftMargin=70, topMargin=70,
+                                bottomMargin=60)
+        report = []
+
+        styles = getSampleStyleSheet()
+        styles.add(ParagraphStyle(name="Times", fontName='Times-Roman', fontSize=15, alignment=TA_JUSTIFY))
+
+        p_text = "<u>ANEXA 1</u>"
+        report.append(Paragraph(p_text, styles["Times"]))
+        report.append(Spacer(1, 5))
+        doc.build(report)
+        return response
+    return render(request, 'pdf_test.html')

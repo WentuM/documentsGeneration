@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>{{ article.title }}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+    @page { size: A4; margin: 1cm; }
+    @font-face { font-family: Arial; src: url({{MEDIA_ROOT}}/fonts/arial.ttf); }
+    body { font-size: 14px; line-height: 1em; font-family: Arial; }
+    a { color: #FB9925; }
+    h3 { font-weight: bold; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<img src="{{MEDIA_ROOT}}/img/logo.png" width="170" height="105" alt="logo" />
+
+<h3>{{ article.date|date:"d.m.Y" }}. {{ article.title }}</h3>
+
+<div>{{ article.text|safe }}</div>
+
+</body>
+</html>
